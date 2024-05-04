@@ -8,7 +8,6 @@ public abstract class User {
     public String cardId;
     HashMap<String, Integer> userID = new HashMap<>();
 
-
     public User(String firstName, String surname, String cardId, HashMap<String, Integer> userID) {
         this.firstName = firstName;
         this.surname = surname;
