@@ -2,12 +2,13 @@ package pl.edu.agh.qa.library.items;
 
 public abstract class Item {
     public String title;
-    public int count = 0;
-    public int availableCount=0;
 
-    public Item(String title, int count, int availableCount) {
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Item(String title) {
         this.title = title;
-        this.count = count;
-        this.availableCount = availableCount;
     }
 }

@@ -5,14 +5,15 @@ import java.util.HashMap;
 public abstract class User {
     public String firstName;
     public String surname;
-    public String cardId;
+    public int cardId;
     HashMap<String, Integer> userID = new HashMap<>();
 
-    public User(String firstName, String surname, String cardId, HashMap<String, Integer> userID) {
+
+
+    public User(String firstName, String surname, HashMap<String, Integer> userID) {
         this.firstName = firstName;
         this.surname = surname;
         this.userID = userID;
-        this.cardId = cardId;
     }
 
     protected void setFirstName(String firstName) {
@@ -27,7 +28,22 @@ public abstract class User {
         this.userID = userID;
     }
 
-    public void setCardId(String cardId) {
+    public void setCardId(int cardId) {
         this.cardId = cardId;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public int getCardId() {
+        return cardId;
+    }
+
+    public HashMap<String, Integer> getUserID() {
+        return userID;
     }
 }
