@@ -14,12 +14,10 @@ import java.util.Map;
 
 public class runner {
     public static void main(String[] args) {
-        List<User> users = new ArrayList<>();//lista uzytkowników
-        Map<Item, int[]> itemMap = new HashMap<>(); // itemy
         HashMap<String, Integer> userID = new HashMap<>();
 
         // Nowa biblioteka
-        Library library = new Library(users,itemMap);
+        Library library = new Library();
         //Studenty
         Student stu = new Student("olg","olg",userID);
         Student stu1 = new Student("olg1","olg1",userID);
@@ -35,6 +33,11 @@ public class runner {
         Magazine magazine3= new Magazine("MagazinAutor","12/03/2024");
         library.addItemToLibrary(book1,magazine1,magazine2,magazine3);
         library.printListOfMagazines();
+
+        library.rentItemToUser(book1, stu);
+        library.rentItemToUser(magazine1, stu);
+
+        library.rentItemToUser(book1, stu2);
 
     }
 }

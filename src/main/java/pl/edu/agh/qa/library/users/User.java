@@ -3,11 +3,11 @@ package pl.edu.agh.qa.library.users;
 import java.util.HashMap;
 
 public abstract class User {
-    public String firstName;
-    public String surname;
-    public int cardId;
+    protected String firstName;
+    protected String surname;
+    protected int cardId;
+    protected byte limit;
     HashMap<String, Integer> userID = new HashMap<>();
-
 
 
     public User(String firstName, String surname, HashMap<String, Integer> userID) {
@@ -24,6 +24,10 @@ public abstract class User {
         this.surname = surname;
     }
 
+    public byte getLimit() {
+        return limit;
+    }
+
     protected void setUserID(HashMap<String, Integer> userID) {
         this.userID = userID;
     }
@@ -31,6 +35,7 @@ public abstract class User {
     public void setCardId(int cardId) {
         this.cardId = cardId;
     }
+
     public String getFirstName() {
         return firstName;
     }
