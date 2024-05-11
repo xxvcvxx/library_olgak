@@ -7,4 +7,8 @@ public String author;
         super(title);
         this.author = author;
     }
+
+    public String getAuthor() {
+        return author;
+    }
 }

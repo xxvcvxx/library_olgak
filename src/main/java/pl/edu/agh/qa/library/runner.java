@@ -28,10 +28,12 @@ public class runner {
         library.printListOfUsers();
         //dodaje itemki
         Book book1= new Book("BookTitle","BookAutor");
+        Book book2= new Book("BookTitle3","BookAutor1");
+        Book book3= new Book("BookTitle","BookAutor");
         Magazine magazine1= new Magazine("MagazinAutor","12/03/2024");
         Magazine magazine2= new Magazine("MagazinAutor","12/03/2024");
         Magazine magazine3= new Magazine("MagazinAutor","12/03/2024");
-        library.addItemToLibrary(book1,magazine1,magazine2,magazine3);
+        library.addItemToLibrary(book1,magazine1,magazine2,magazine3,book2,book3);
         library.printListOfMagazines();
 
         library.rentItemToUser(book1, stu);
@@ -39,6 +41,7 @@ public class runner {
 
         library.rentItemToUser(book1, stu2);
         library.printListOfMagazines();
+        library.printListOfBooks();
 
     }
 }
