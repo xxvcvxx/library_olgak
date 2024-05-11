@@ -62,6 +62,32 @@ public class Library {
     }
 
     public void printListOfMagazines() {
+        ArrayList<String> itemm = new ArrayList<>();
+        for (Map.Entry<Item, Boolean> entry : itemMap.entrySet()) {
+            Item item = entry.getKey();
+            Boolean value = entry.getValue();
+            int count=0;
+            int availableCount=0;
+            if(!itemm.contains(item.getTitle()))
+            {
+                itemm.add(item.getTitle());
+                count++;
+                if (value)
+                {
+                    availableCount++;
+                }
+            }else
+            {
+            count++;
+                if (value)
+                {
+                    availableCount++;
+                }
+            }
+
+
+            System.out.println("Item: " + item.getTitle() + ", Value: " + value);
+        }
     }
 
     public void printListOfBooks() {

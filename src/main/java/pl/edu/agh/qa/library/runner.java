@@ -38,6 +38,7 @@ public class runner {
         library.rentItemToUser(magazine1, stu);
 
         library.rentItemToUser(book1, stu2);
+        library.printListOfMagazines();
 
     }
 }
