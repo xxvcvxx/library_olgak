@@ -1,18 +1,13 @@
 package pl.edu.agh.qa.library;
 
 import pl.edu.agh.qa.library.items.Book;
-import pl.edu.agh.qa.library.items.Item;
 import pl.edu.agh.qa.library.items.Magazine;
 import pl.edu.agh.qa.library.users.Lecturer;
 import pl.edu.agh.qa.library.users.Student;
-import pl.edu.agh.qa.library.users.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class runner {
+public class Runner {
     public static void main(String[] args) {
         HashMap<String, Integer> userID = new HashMap<>();
 

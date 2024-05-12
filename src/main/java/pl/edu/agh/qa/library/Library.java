@@ -12,7 +12,7 @@ public class Library {
     private int cardId = 1;
 
     private List<User> userList;
-    private Map<Item, Boolean> itemMap;// true dostepna
+    private Map<Item, Boolean> itemMap;// false if book is borrowed
     private Map<User, List<Item>> rentings;
 
     public Library() {
@@ -58,6 +58,7 @@ public class Library {
     }
 
     public void importItemsFromFile(String csvFile) {
+
     }
 
     public void exportUsersWithItemsToFile(String csvFile) {
@@ -70,30 +71,27 @@ public class Library {
             Item item = entry.getKey();
             Boolean isAvailable = entry.getValue();
 
-            if (item instanceof Magazine) { // Sprawdź, czy przedmiot jest typu Magazine
+            if (item instanceof Magazine) {
                 Magazine magazine = (Magazine) item;
                 String key = magazine.getTitle() + ";" + magazine.getMagazineNumber();
 
                 if (magazineCounts.containsKey(key)) {
-                    magazineCounts.get(key)[0]++; // Zwiększ całkowitą liczbę przedmiotów
+                    magazineCounts.get(key)[0]++;
 
                     if (isAvailable) {
-                        magazineCounts.get(key)[1]++; // Zwiększ liczbę dostępnych przedmiotów
+                        magazineCounts.get(key)[1]++;
                     }
                 } else {
                     int[] counts = new int[2];
-                    counts[0] = 1; // Całkowita liczba przedmiotów
+                    counts[0] = 1;
 
                     if (isAvailable) {
-                        counts[1] = 1; // Liczba dostępnych przedmiotów
+                        counts[1] = 1;
                     }
                     magazineCounts.put(key, counts);
                 }
             }
         }
-
-        // Wyświetl zliczenia dla magazynów
-        System.out.println("=== Magazines ===");
         for (Map.Entry<String, int[]> entry : magazineCounts.entrySet()) {
             String[] parts = entry.getKey().split(";");
             String title = parts[0];
@@ -103,8 +101,6 @@ public class Library {
             int availableCount = counts[1];
             System.out.println(title + ";" + magazineNumber + ";" + totalCount + ";" + availableCount);
         }
-
-
     }
 
     public void printListOfBooks() {
@@ -114,30 +110,25 @@ public class Library {
             Item item = entry.getKey();
             Boolean isAvailable = entry.getValue();
 
-            if (item instanceof Book) { // Sprawdź, czy przedmiot jest typu Book
+            if (item instanceof Book) {
                 Book book = (Book) item;
                 String key = book.getTitle() + ";" + book.getAuthor();
 
                 if (bookCounts.containsKey(key)) {
-                    bookCounts.get(key)[0]++; // Zwiększ całkowitą liczbę przedmiotów
-
+                    bookCounts.get(key)[0]++;
                     if (isAvailable) {
-                        bookCounts.get(key)[1]++; // Zwiększ liczbę dostępnych przedmiotów
+                        bookCounts.get(key)[1]++;
                     }
                 } else {
                     int[] counts = new int[2];
-                    counts[0] = 1; // Całkowita liczba przedmiotów
-
+                    counts[0] = 1;
                     if (isAvailable) {
-                        counts[1] = 1; // Liczba dostępnych przedmiotów
+                        counts[1] = 1;
                     }
                     bookCounts.put(key, counts);
                 }
             }
         }
-
-        // Wyświetl zliczenia dla książek
-        System.out.println("=== Books ===");
         for (Map.Entry<String, int[]> entry : bookCounts.entrySet()) {
             String[] parts = entry.getKey().split(";");
             String title = parts[0];
@@ -160,5 +151,4 @@ public class Library {
             System.out.println(user.getFirstName() + ";" + user.getSurname() + ";" + user.getCardId() + ";" + userType);
         }
     }
-
 }
