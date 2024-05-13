@@ -1,6 +1,8 @@
 package pl.edu.agh.qa.library;
 
+import pl.edu.agh.qa.library.items.Book;
 import pl.edu.agh.qa.library.items.Item;
+import pl.edu.agh.qa.library.items.Magazine;
 import pl.edu.agh.qa.library.users.Student;
 import pl.edu.agh.qa.library.users.User;
 
@@ -10,7 +12,7 @@ public class Library {
     private int cardId = 1;
 
     private List<User> userList;
-    private Map<Item, Boolean> itemMap;// true dostepna
+    private Map<Item, Boolean> itemMap;// false if book is borrowed
     private Map<User, List<Item>> rentings;
 
     public Library() {
@@ -56,15 +58,86 @@ public class Library {
     }
 
     public void importItemsFromFile(String csvFile) {
+
     }
 
     public void exportUsersWithItemsToFile(String csvFile) {
     }
 
     public void printListOfMagazines() {
+        Map<String, int[]> magazineCounts = new HashMap<>();
+
+        for (Map.Entry<Item, Boolean> entry : itemMap.entrySet()) {
+            Item item = entry.getKey();
+            Boolean isAvailable = entry.getValue();
+
+            if (item instanceof Magazine) {
+                Magazine magazine = (Magazine) item;
+                String key = magazine.getTitle() + ";" + magazine.getMagazineNumber();
+
+                if (magazineCounts.containsKey(key)) {
+                    magazineCounts.get(key)[0]++;
+
+                    if (isAvailable) {
+                        magazineCounts.get(key)[1]++;
+                    }
+                } else {
+                    int[] counts = new int[2];
+                    counts[0] = 1;
+
+                    if (isAvailable) {
+                        counts[1] = 1;
+                    }
+                    magazineCounts.put(key, counts);
+                }
+            }
+        }
+        for (Map.Entry<String, int[]> entry : magazineCounts.entrySet()) {
+            String[] parts = entry.getKey().split(";");
+            String title = parts[0];
+            String magazineNumber = parts[1];
+            int[] counts = entry.getValue();
+            int totalCount = counts[0];
+            int availableCount = counts[1];
+            System.out.println(title + ";" + magazineNumber + ";" + totalCount + ";" + availableCount);
+        }
     }
 
     public void printListOfBooks() {
+        Map<String, int[]> bookCounts = new HashMap<>();
+
+        for (Map.Entry<Item, Boolean> entry : itemMap.entrySet()) {
+            Item item = entry.getKey();
+            Boolean isAvailable = entry.getValue();
+
+            if (item instanceof Book) {
+                Book book = (Book) item;
+                String key = book.getTitle() + ";" + book.getAuthor();
+
+                if (bookCounts.containsKey(key)) {
+                    bookCounts.get(key)[0]++;
+                    if (isAvailable) {
+                        bookCounts.get(key)[1]++;
+                    }
+                } else {
+                    int[] counts = new int[2];
+                    counts[0] = 1;
+                    if (isAvailable) {
+                        counts[1] = 1;
+                    }
+                    bookCounts.put(key, counts);
+                }
+            }
+        }
+        for (Map.Entry<String, int[]> entry : bookCounts.entrySet()) {
+            String[] parts = entry.getKey().split(";");
+            String title = parts[0];
+            String author = parts[1];
+            int[] counts = entry.getValue();
+            int totalCount = counts[0];
+            int availableCount = counts[1];
+            System.out.println(title + ";" + author + ";" + totalCount + ";" + availableCount);
+        }
     }
 
     public void printListOfUsers() {
@@ -78,5 +151,4 @@ public class Library {
             System.out.println(user.getFirstName() + ";" + user.getSurname() + ";" + user.getCardId() + ";" + userType);
         }
     }
-
 }
