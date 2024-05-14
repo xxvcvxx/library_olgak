@@ -37,6 +37,11 @@ public class Runner {
         library.rentItemToUser(book1, stu2);
         library.printListOfMagazines();
         library.printListOfBooks();
+        library.importItemsFromFile("books.csv");
+        System.out.println("=================");
+        library.printListOfMagazines();
+        library.printListOfBooks();
+
 
     }
 }
