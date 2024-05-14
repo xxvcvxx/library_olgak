@@ -6,7 +6,14 @@ import pl.edu.agh.qa.library.items.Magazine;
 import pl.edu.agh.qa.library.users.Student;
 import pl.edu.agh.qa.library.users.User;
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Library {
     private int cardId = 1;
@@ -39,7 +46,6 @@ public class Library {
         if (itemIsAlreadyRented) {
             return false;
         }
-
         List<Item> userItems = rentings.get(user);
         if (userItems != null) {
             int itemsRentedByUser = userItems.size();
@@ -47,7 +53,6 @@ public class Library {
                 return false;
             }
         }
-
         if (userItems == null) {
             userItems = new ArrayList<>();
             rentings.put(user, userItems);
@@ -58,10 +63,31 @@ public class Library {
     }
 
     public void importItemsFromFile(String csvFile) {
-
+        try (FileReader fileReader = new FileReader(csvFile); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String row;
+            while ((row = bufferedReader.readLine()) != null) {
+                String[] itemData = row.split(";");
+                if (itemData[3].equals("B")) {
+                    for (int i = 1; i <= (Integer.parseInt(itemData[2])); i++) {
+                        addItemToLibrary(new Book(itemData[0], itemData[1]));
+                    }
+                } else if (itemData[3].equals("M")) {
+                    for (int i = 1; i <= (Integer.parseInt(itemData[2])); i++) {
+                        addItemToLibrary(new Magazine(itemData[0], itemData[1]));
+                    }
+                } else {
+                    System.out.println("Wrong Item Type.");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error reading from file: " + e.getMessage());
+        }
     }
 
     public void exportUsersWithItemsToFile(String csvFile) {
+
     }
 
     public void printListOfMagazines() {
