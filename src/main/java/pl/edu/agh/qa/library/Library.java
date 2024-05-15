@@ -84,7 +84,6 @@ public class Library {
     }
 
     public void exportUsersWithItemsToFile(String csvFile) {
-
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
             for (Map.Entry<User, List<Item>> entry : rentings.entrySet()) {
@@ -109,7 +108,6 @@ public class Library {
                 writer.newLine();
             }
             writer.close();
-            //System.out.println("Plik został zapisany pomyślnie.");
         } catch (IOException e) {
             System.out.println("Error " + e.getMessage());
         }
