@@ -14,10 +14,10 @@ public class Runner {
         // Nowa biblioteka
         Library library = new Library();
         //Studenty
-        Student stu = new Student("olg","olg",userID);
-        Student stu1 = new Student("olg1","olg1",userID);
-        Student stu2 = new Student("olg2","olg2",userID);
-        Lecturer lec1=new Lecturer("Lec","lec",userID);
+        Student stu = new Student("olg","olg");
+        Student stu1 = new Student("olg1","olg1");
+        Student stu2 = new Student("olg2","olg2");
+        Lecturer lec1=new Lecturer("Lec","lec");
         //dodaje studentów i wypisuje
         library.addUserToLibrary(stu,stu1,stu2,lec1);
         library.printListOfUsers();
@@ -38,11 +38,11 @@ public class Runner {
         library.rentItemToUser(magazine3,lec1);
         library.printListOfMagazines();
         library.printListOfBooks();
-        //library.importItemsFromFile("books.csv");
+        library.importItemsFromFile("book.csv");
         System.out.println("=================");
         library.printListOfMagazines();
         library.printListOfBooks();
-        library.exportUsersWithItemsToFile("books.csv");
+        library.exportUsersWithItemsToFile("book_export.csv");
 
 
     }
