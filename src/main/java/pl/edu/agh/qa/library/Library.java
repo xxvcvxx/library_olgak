@@ -6,10 +6,7 @@ import pl.edu.agh.qa.library.items.Magazine;
 import pl.edu.agh.qa.library.users.Student;
 import pl.edu.agh.qa.library.users.User;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +85,34 @@ public class Library {
 
     public void exportUsersWithItemsToFile(String csvFile) {
 
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(csvFile));
+            for (Map.Entry<User, List<Item>> entry : rentings.entrySet()) {
+                User user = entry.getKey();
+                List<Item> itemList = entry.getValue();
+                String itemListString = "";
+
+                for (int i = 0; i < itemList.size(); i++) {
+                    Item item = itemList.get(i);
+                    String itemTitle = item.getTitle();
+                    itemListString += itemTitle + "-";
+
+                    if (item instanceof Magazine) {
+                        itemListString += ((Magazine) item).getMagazineNumber();
+                    } else if (item instanceof Book) {
+                        itemListString += ((Book) item).getAuthor();
+                    }
+                    if (i != itemList.size() - 1) itemListString += "; ";
+
+                }
+                writer.write("ID" + user.getCardId() + "[" + itemListString + "]");
+                writer.newLine();
+            }
+            writer.close();
+            //System.out.println("Plik został zapisany pomyślnie.");
+        } catch (IOException e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }
 
     public void printListOfMagazines() {
